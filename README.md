@@ -1,4 +1,5 @@
 najibnsupdate
 =============
 
-najib dyndns update - client
+dyndns/dynamic DNS update client
++ server (Bind/named) configuration howto
