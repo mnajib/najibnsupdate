@@ -1,0 +1,7 @@
+[ ] setup web server on dyndns server serving page for dyndns client get their public IP; example: http://najib.dyndns.magnifix.com.my/whatismyip/
+[/] if multiple host with same client; just get public ip once from whatismyip.org.
+[ ] if multiple need update for multiple host to same server, and if using the same 'key', do just update all in one run (one config file / run nsupdate only once).
+[ ] untidy the code/script
+[ ] write proper documentation
+[ ] generate tar.gz package
+[ ] introduce to public

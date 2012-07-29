@@ -1,0 +1,4 @@
+M2011-11-01
+- major rewrite the scripts to support multiple host update
+- setup in /opt; make use of better directory structure
+- 
