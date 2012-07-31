@@ -1,7 +1,7 @@
 Example usage:
 
 /--------\                                           /------\
-| Office |-------------------------------------------| Home |
+| Office |<------------------------------------------| Home |
 \--------/                                           \------/
 (static IP)                                      (dynamic IP)
 with Bind/named DNS server
