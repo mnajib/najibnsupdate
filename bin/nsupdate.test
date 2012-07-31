@@ -1,0 +1,81 @@
+#!/bin/sh
+# vim:ts=8:sw=2 et:sta background=dark:
+#
+# Copyright (c) 2011 Mohd Najib Bin Ibrahim 
+#        (mnajib@gmail.com)
+# All rights reserved.
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions
+# are met:
+# 1. Redistributions of source code must retain the above copyright
+#    notice, this list of conditions and the following disclaimer.
+# 2. Redistributions in binary form must reproduce the above copyright
+#    notice, this list of conditions and the following disclaimer in the
+#    documentation and/or other materials provided with the distribution.
+#
+# THIS SOFTWARE IS PROVIDED BY THE AUTHOR AND CONTRIBUTORS ``AS IS'' AND
+# ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+# IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+# ARE DISCLAIMED.  IN NO EVENT SHALL THE AUTHOR OR CONTRIBUTORS BE LIABLE
+# FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+# DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+# OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+# HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+# LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+# OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+# SUCH DAMAGE.
+#
+# 201110
+# 201111
+# 201205
+#
+# usage: do-nsupdate [text-file-containing-nsupdate-instructions]
+#
+# Configure scheduling: 
+#   check for every 20 minutes.
+#   then do update if diff IP detected.
+# crontab -e
+#   #*/20 * * * * /root/bin/do-nsupdate.sh >/dev/null 2>&1
+#   #*/2 * * * * /root/bin/do-nsupdate.sh >/dev/null 2>&1
+#   */2 * * * * /opt/do-nsupdate/0.0.1/bin/do-nsupdate.sh >/dev/null 2>&1
+#   */2 * * * * /opt/nsupdate/0.0.1/bin/nsupdate >/dev/null 2>&1
+#
+# configure logrotate:
+#   ...
+#
+# Requirement:
+# - grep/egrep
+# - bash
+# - ntpd
+# - curl
+# - dig
+# - nsupdate (come with bind package)
+# - logger
+# - logrotate
+# - najib.sh # not for now
+# - find
+# - sed
+# - awk
+
+ROOTDIR="/opt/nsupdate/0.0.1"
+#NSUPDATE="/usr/bin/nsupdate" # whereis nsupdate
+
+#LOGFILE="/tmp/nsupdate.log"
+LOGFILE="${ROOTDIR}/var/log/nsupdate.log"
+
+#IPSFILE="/tmp/ips.txt"
+IPSFILE="${ROOTDIR}/var/log/ip-list.txt"
+
+. ${ROOTDIR}/bin/nsupdate_func.sh
+
+#DOUPDATE="yes"
+#IPNEW="`_newIP`"	# run this only once 
+
+#_logIP "/tmp/ips.txt" "2.2.2.2"
+#_logIP "/tmp/ips.txt" "$1"
+#_logIP "${IPSFILE}" "$1"
+#_logIP "${IPSFILE}" "2.2.2.2"
+_logIP "${IPSFILE}" "9.9.9.9"
+#_print_ip_from_file "${IPSFILE}"
+
