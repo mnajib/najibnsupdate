@@ -2,6 +2,7 @@
 [/] if multiple host with same client; just get public ip once from whatismyip.org.
 [/] if multiple need update for multiple host to same server, and if using the same 'key', do just update all in one run (one config file / run nsupdate only once).
 [ ] untidy the code/script
-[ ] write proper documentation
+[ ] write proper documentation on setting up the DNS server for accept dynamic update request.
+[ ] write proper documentation on setting up the client.
 [ ] generate tar.gz package
-[/] share at github.com
+[/] share at git hosting service (example: github.com)
