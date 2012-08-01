@@ -28,10 +28,12 @@
 #
 # 201110
 # 201111
+# 201205
+# 201206
 #
 
 # arg1: host
-_genkey() {
+function _genkey() {
   local HOST="$1"
 
   cd "$ROOTDIR/key/"
@@ -45,7 +47,7 @@ _genkey() {
   echo ""
 }
 
-_enabledHost() {
+function _enabledHost() {
   # Return list of enabled host - name of config files in ./conf/enabled/*
   #local files=(
   CONFFILES=(
@@ -71,9 +73,10 @@ _loadConf() {
 _newIP() {
   #local IPNEW="`curl -s "http://whatismyip.org/"`"
   #local IPNEW="`curl whatismyip.org`"
-  local IPNEW="`curl -s whatismyip.org`"
+  #local IPNEW="`curl -s whatismyip.org`"
   #local IPNEW="`curl -s "http://whatismyip.magnifix.com.my`" # TODO: 
   #local IPNEW="`curl -s "http://najib.dyndns.magnifix.com.my/whatismyip/"`" # ready to be test
+  local IPNEW="`curl -s http://www.dnsstuff.com/where-are-my-results| egrep 'Your IP Address' | sed 's/^.*<strong>//g' | sed 's/<\/strong>.*$//g'`"
 
   sleep 1
 
@@ -187,8 +190,8 @@ _logIP(){
   #numoflines2=`echo -en "${dtext}\n${ip}\n" | sort -u | wc -l`
   numoflines2=`echo -en "${dtext}\n${ip}\n" | sort -u | wc -l`
 
-  echo "linebefore: $numoflines"
-  echo "lineafter: $numoflines2"
+  #echo "linebefore: $numoflines"
+  #echo "lineafter: $numoflines2"
   linebefore=$numoflines
   lineafter=$numoflines2
 
@@ -199,7 +202,7 @@ _logIP(){
   #if [[ `echo "$linebefore - $lineafter" | bc` ]]; then # XXX:
   #if [ `echo "$linebefore - $lineafter" | bc` ]; then # XXX:
   #if [ $status -eq 0 ]; then # XXX:
-    echo "!!!diff!!diff!!"
+    #echo "!!!diff!!diff!!"
     #echo "same" >> /dev/null
     echo "${ip}" >> "${filename}"
     #echo -en "${dtext}\n${ip}\n" | sort
@@ -211,8 +214,7 @@ _logIP(){
   #  echo -en "${dtext}\n" | sort
   fi
 
-  cat ${filename} | sort
-
+  #cat ${filename} | sort
 }
 
 # arg1: file
@@ -234,8 +236,6 @@ _sameServer() {
   local server2="$2"
 
   echo "TODO: ..."
-
-
 }
 
 _createConfig(){
@@ -264,6 +264,7 @@ _doUpdate(){
   #nsupdate -d -k "key.conf" -v "${TMPFILE}"
   nsupdate -d -k "${ROOTDIR}/key/${KEYFILE}" -v "${TMPFILE}"
 }
+
 # without using temp file
 # 2913 seconds = 48.55 minutes # used by dyndns.com for dyndns ns server
 # 1800 seconds = 30 minutes
